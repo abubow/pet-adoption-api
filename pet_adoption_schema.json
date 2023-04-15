@@ -1,0 +1,131 @@
+{
+    "pets": [
+        {
+            "name": {
+                "type": "string",
+                "required": true
+            },
+            "breed": "string",
+            "age": "number",
+            "gender": "string",
+            "size": "string",
+            "species": {
+                "type": "string",
+                "required": true
+            },
+            "description": "string",
+            "images": [
+                "string"
+            ],
+            "status": {
+                "type": "string",
+                "enum": [
+                    "available",
+                    "adopted"
+                ]
+            },
+            "adopted_by": {
+                "type": "ObjectId",
+                "ref": "users"
+            },
+            "shelter_id": {
+                "type": "ObjectId",
+                "ref": "shelters",
+                "required": true
+            },
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "indexes": [
+                {
+                    "species": 1
+                },
+                {
+                    "shelter_id": 1
+                }
+            ]
+        }
+    ],
+    "shelters": [
+        {
+            "name": {
+                "type": "string",
+                "required": true
+            },
+            "location": {
+                "address": "string",
+                "city": "string",
+                "state": "string",
+                "zip": "string",
+                "country": "string"
+            },
+            "phone_number": "string",
+            "email": {
+                "type": "string",
+                "required": true,
+                "unique": true
+            },
+            "website": "string",
+            "description": "string",
+            "pets": [
+                {
+                    "type": "ObjectId",
+                    "ref": "pets"
+                }
+            ],
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "indexes": [
+                {
+                    "email": 1
+                }
+            ]
+        }
+    ],
+    "users": [
+        {
+            "name": {
+                "type": "string",
+                "required": true
+            },
+            "email": {
+                "type": "string",
+                "required": true,
+                "unique": true
+            },
+            "password": "string",
+            "phone_number": "string",
+            "address": "string",
+            "city": "string",
+            "state": "string",
+            "zip": "string",
+            "country": "string",
+            "role": {
+                "type": "string",
+                "enum": [
+                    "adopter",
+                    "shelter_staff",
+                    "admin"
+                ]
+            },
+            "pets_adopted": [
+                {
+                    "type": "ObjectId",
+                    "ref": "pets"
+                }
+            ],
+            "created_at": "date",
+            "updated_at": "date"
+        },
+        {
+            "indexes": [
+                {
+                    "email": 1
+                }
+            ]
+        }
+    ]
+}
